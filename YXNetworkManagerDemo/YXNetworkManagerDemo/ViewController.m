@@ -6,6 +6,7 @@
 //
 
 #import "ViewController.h"
+#import "YXNetworkManager.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,5 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-
 
 @end
