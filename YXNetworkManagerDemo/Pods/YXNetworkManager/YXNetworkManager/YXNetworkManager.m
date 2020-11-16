@@ -82,6 +82,20 @@ static AFHTTPSessionManager *_sessionManager;
     }];
 }
 
++ (YXNetworkStatusType)networkStatus {
+    AFNetworkReachabilityStatus status = [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+    switch (status) {
+        case AFNetworkReachabilityStatusUnknown:
+            return YXNetworkStatusUnknown;
+        case AFNetworkReachabilityStatusNotReachable:
+            return YXNetworkStatusNotReachable;
+        case AFNetworkReachabilityStatusReachableViaWWAN:
+            return YXNetworkStatusReachableViaWWAN;
+        case AFNetworkReachabilityStatusReachableViaWiFi:
+            return YXNetworkStatusReachableViaWiFi;
+    }
+}
+
 + (void)cancelAllRequest {
     @synchronized(self) {
         [[self allSessionTask] enumerateObjectsUsingBlock:^(NSURLSessionTask *_Nonnull task, NSUInteger idx, BOOL *_Nonnull stop) {

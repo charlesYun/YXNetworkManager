@@ -73,6 +73,9 @@ typedef void (^YXNetworkStatus)(YXNetworkStatusType status);
 /// 实时获取网络状态,通过Block回调实时获取
 + (void)networkStatusWithBlock:(YXNetworkStatus)networkStatus;
 
+/// 获取当前网络状态
++ (YXNetworkStatusType)networkStatus;
+
 /// GET请求
 /// @param URL 请求地址
 /// @param parameters 参数
