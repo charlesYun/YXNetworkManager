@@ -246,7 +246,11 @@ static AFHTTPSessionManager *_sessionManager;
         return [NSURL fileURLWithPath:filePath];
     } completionHandler:^(NSURLResponse *_Nonnull response, NSURL *_Nullable filePath, NSError *_Nullable error) {
         [[self allSessionTask] removeObject:downloadTask];
-        failure ? failure(error) : nil;
+        if (error) {
+            failure ? failure(error) : nil;
+        }else {
+            success ? success(filePath.path) : nil;
+        }
     }];
     [downloadTask resume];
     downloadTask ? [[self allSessionTask] addObject:downloadTask] : nil;
