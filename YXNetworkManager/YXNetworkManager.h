@@ -197,8 +197,9 @@ typedef void (^YXNetworkStatus)(YXNetworkStatusType status);
 
 /// 公共解析
 /// @param responseObject 请求数据
+/// @param dataTask 请求信息
 /// @param success 成功回调
 /// @param failure 失败回调
-+ (void)analysisResponseObject:(id)responseObject success:(YXHttpRequestSuccess)success failure:(YXHttpRequestFailed)failure;
++ (void)analysisResponseObject:(id)responseObject dataTask:(NSURLSessionDataTask *)dataTask success:(YXHttpRequestSuccess)success failure:(YXHttpRequestFailed)failure;
 
 @end

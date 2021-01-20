@@ -210,7 +210,7 @@ static AFHTTPSessionManager *_sessionManager;
             failure ? failure(error) : nil;
         } else {
             if (success) {
-                [self analysisResponseObject:responseObject success:^(id response) {
+                [self analysisResponseObject:responseObject dataTask:dataTask success:^(id response) {
                     model ? success([model yy_modelWithDictionary:response]) : success(response);
                 } failure:^(NSError *error) {
                     failure ? failure(error) : nil;
@@ -278,7 +278,7 @@ static AFHTTPSessionManager *_sessionManager;
     return [NSString stringWithFormat:@"%@%@", @"BaseUrl", URL];
 }
 
-+ (void)analysisResponseObject:(id)responseObject success:(YXHttpRequestSuccess)success failure:(YXHttpRequestFailed)failure {
++ (void)analysisResponseObject:(id)responseObject dataTask:(NSURLSessionDataTask *)dataTask success:(YXHttpRequestSuccess)success failure:(YXHttpRequestFailed)failure {
     NSAssert(NO, @"子类需重写此方法");
     //example
     NSDictionary *responseDict = (NSDictionary *)responseObject;
