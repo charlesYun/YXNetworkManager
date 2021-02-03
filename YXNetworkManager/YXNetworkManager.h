@@ -195,11 +195,17 @@ typedef void (^YXNetworkStatus)(YXNetworkStatusType status);
 /// @param URL 地址
 + (NSString *)getFullRequestURL:(NSString *)URL;
 
-/// 公共解析
+/// 成功 公共解析
 /// @param responseObject 请求数据
 /// @param dataTask 请求信息
 /// @param success 成功回调
 /// @param failure 失败回调
 + (void)analysisResponseObject:(id)responseObject dataTask:(NSURLSessionDataTask *)dataTask success:(YXHttpRequestSuccess)success failure:(YXHttpRequestFailed)failure;
+
+/// 失败 公共解析
+/// @param error 错误数据
+/// @param dataTask 请求信息
+/// @param failure 失败回调
++ (void)analysisError:(NSError *)error dataTask:(NSURLSessionDataTask *)dataTask failure:(YXHttpRequestFailed)failure;
 
 @end

@@ -207,13 +207,13 @@ static AFHTTPSessionManager *_sessionManager;
     __block NSURLSessionDataTask *dataTask = [_sessionManager dataTaskWithRequest:[self getEncryptRequest:method URL:URL parameters:parameters] uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse *_Nonnull response, id _Nullable responseObject, NSError *_Nullable error) {
         [[self allSessionTask] removeObject:dataTask];
         if (error) {
-            failure ? failure(error) : nil;
+            [self analysisError:error dataTask:dataTask failure:failure];
         } else {
             if (success) {
                 [self analysisResponseObject:responseObject dataTask:dataTask success:^(id response) {
                     model ? success([model yy_modelWithDictionary:response]) : success(response);
                 } failure:^(NSError *error) {
-                    failure ? failure(error) : nil;
+                    [self analysisError:error dataTask:dataTask failure:failure];
                 }];
             }
             responseCache ? [YXNetworkCache setHttpCache:responseObject URL:URL parameters:parameters] : nil;
@@ -289,6 +289,12 @@ static AFHTTPSessionManager *_sessionManager;
         NSError *error = [NSError errorWithDomain:@"BaseUrl" code:code userInfo:@{ NSLocalizedDescriptionKey: responseDict[@"message"] }];
         failure(error);
     }
+}
+
++ (void)analysisError:(NSError *)error dataTask:(NSURLSessionDataTask *)dataTask failure:(YXHttpRequestFailed)failure {
+    NSAssert(NO, @"子类需重写此方法");
+    //example
+    failure(error);
 }
 
 #pragma mark - lazy
