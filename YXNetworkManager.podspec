@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "YXNetworkManager"
-  s.version      = "0.0.9"
+  s.version      = "1.0.0"
   s.summary      = "提示框"
   s.description  = <<-DESC
                     YXNetworkManager 是使用AFNetworking、YYCache、YYModel的再封装，只为使用更简单
